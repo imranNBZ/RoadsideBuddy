@@ -88,7 +88,7 @@ database = firebase.database()
 auth = firebase.auth()
 
 # Firebase Initialization
-cred = credentials.Certificate('//Users/imrannabizada/Desktop/RoadSideBuddy/code & Tests/firebase/roadsidebuddy-35064-firebase-adminsdk-fbsvc-99d790f84b.json')
+cred = credentials.Certificate('//Users/imrannabizada/Desktop/RoadSideBuddy/codeAndTests/firebase/roadsidebuddy-35064-firebase-adminsdk-fbsvc-99d790f84b.json')
 firebase_app = initialize_app(cred, {"databaseURL": [Config.DATABASE_URL]})
 
 
