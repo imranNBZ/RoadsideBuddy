@@ -76,7 +76,6 @@ pydantic==2.10.5
 pydantic_core==2.27.2
 PyJWT==2.10.1
 pyparsing==3.2.1
-Pyrebase3==4.0.2
 Pyrebase4==4.8.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
