@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request, redirect, url_for, flash, render_template, session
-from forms import SignupForm, LoginForm, ProfileForm, ServiceForm, EmailForm
+from codeAndTests.forms import SignupForm, LoginForm, ProfileForm, ServiceForm, EmailForm
 from flask_debugtoolbar import DebugToolbarExtension
 from firebase_admin import credentials, initialize_app, auth as admin_auth, datetime, db as rdb
 from pyrebase import initialize_app as pyrebase_init
