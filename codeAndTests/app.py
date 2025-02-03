@@ -1,12 +1,12 @@
 import os
 from flask import Flask, request, redirect, url_for, flash, render_template, session
-from codeAndTests.forms import SignupForm, LoginForm, ProfileForm, ServiceForm, EmailForm
+from forms import SignupForm, LoginForm, ProfileForm, ServiceForm, EmailForm
 from flask_debugtoolbar import DebugToolbarExtension
 from firebase_admin import credentials, initialize_app, auth as admin_auth, datetime, db as rdb
 from pyrebase import initialize_app as pyrebase_init
-from codeAndTests.models.models import connect_db, User, Service, db
-from codeAndTests.config import Config
-from codeAndTests.authentication import firebase_config
+from models.models import connect_db, User, Service, db
+from config import Config
+from authentication import firebase_config
 from flask_login import current_user, LoginManager, logout_user, login_user
 from werkzeug.security import generate_password_hash
 from dotenv import load_dotenv
