@@ -1,29 +1,41 @@
 import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 class Config:
     # Firebase Setup
-    FIREBASE_CREDENTIALS = os.getenv('FIREBASE_CREDENTIALS', 'codeAndTests/firebase/roadsidebuddy-35064-firebase-adminsdk-fbsvc-99d790f84b.json')
+    FIREBASE_CREDENTIALS = os.getenv('FIREBASE_CREDENTIALS')
+
+    # Debugging: Check if the file exists
+    if not FIREBASE_CREDENTIALS or not os.path.exists(FIREBASE_CREDENTIALS):
+        raise FileNotFoundError(f"Firebase credentials file not found: {FIREBASE_CREDENTIALS}")
+
     FIREBASE_DATABASE_URL = os.getenv("FIREBASE_DATABASE_URL", "https://roadsidebuddy-35064-default-rtdb.firebaseio.com/")
 
     # Security
     SECRET_KEY = os.getenv("SECRET_KEY", "its-a-secret-key")
 
-    # PostgreSQL (Render Database)
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")  # Ensure this is set in Render
+    # PostgreSQL
+    DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://localhost/roadsidebuddy")
+    if DATABASE_URL.startswith("postgres://"):  
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
- 
 
-    # ClickSend API
-    CLICKSEND_USERNAME = os.getenv("CLICKSEND_USERNAME", "")
-    CLICKSEND_API_KEY = os.getenv("CLICKSEND_API_KEY", "")
-
-    # SMTP Email Configuration
-    SMTP_SERVER = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
-    SMTP_PORT = int(os.getenv('SMTP_PORT', 587))
-    SMTP_EMAIL = os.getenv('SMTP_EMAIL', 'admin@example.com')  # Admin email
-    SMTP_PASSWORD = os.getenv('SMTP_PASSWORD', 'yourpassword')  # App-specific password
-    ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'admin@example.com')  # Recipient (admin) email
+firebase_config = {
+    "apiKey": "AIzaSyA63CM9JGZJXp8nWL9fvksHKRuGMO90JYA",
+    "authDomain": "roadsidebuddy-35064.firebaseapp.com",
+    "databaseURL": "https://roadsidebuddy-35064-default-rtdb.firebaseio.com",
+    "projectId": "roadsidebuddy-35064",
+    "storageBucket": "roadsidebuddy-35064.appspot.com",
+    "messagingSenderId": "755289906473",
+    "appId": "1:755289906473:web:1b13c9177fbc3c5ce1eb38",
+    "measurementId": "G-M9G8CJ4N1V",
+}
 
 
 Config = Config()

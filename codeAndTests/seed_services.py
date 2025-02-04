@@ -1,5 +1,5 @@
-from models.models import db, Service
-from app import app
+from codeAndTests.models.models import db, Service
+from codeAndTests.app import app
 
 
 

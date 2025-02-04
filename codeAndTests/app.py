@@ -1,12 +1,13 @@
 import os
 from flask import Flask, request, redirect, url_for, flash, render_template, session
-from forms import SignupForm, LoginForm, ProfileForm, ServiceForm, EmailForm
+from codeAndTests.forms import SignupForm, LoginForm, ProfileForm, ServiceForm, EmailForm
 from flask_debugtoolbar import DebugToolbarExtension
 from firebase_admin import credentials, initialize_app, auth as admin_auth, datetime, db as rdb
+from mapbox import Directions
 from pyrebase import initialize_app as pyrebase_init
-from models.models import connect_db, User, Service, db
-from config import Config
-from authentication import firebase_config
+from codeAndTests.models.models import connect_db, User, Service, db
+from codeAndTests.config import Config
+from codeAndTests.authentication import firebase_config
 from flask_login import current_user, LoginManager, logout_user, login_user
 from werkzeug.security import generate_password_hash
 from dotenv import load_dotenv
@@ -81,21 +82,27 @@ def is_admin():
 
 
 
-# pyrebase firebase init
+
 firebase = pyrebase_init(firebase_config)
 database = firebase.database()
 auth = firebase.auth()
 
-# Firebase Initialization
-cred = credentials.Certificate('//Users/imrannabizada/Desktop/RoadSideBuddy/codeAndTests/firebase/roadsidebuddy-35064-firebase-adminsdk-fbsvc-99d790f84b.json')
-firebase_app = initialize_app(cred, {"databaseURL": [Config.DATABASE_URL]})
+# Debugging: Print Firebase path
+print(f"Using Firebase credentials from: {Config.FIREBASE_CREDENTIALS}")
 
+try:
+    cred = credentials.Certificate(Config.FIREBASE_CREDENTIALS)
+    firebase_app = initialize_app(cred, {"databaseURL": Config.FIREBASE_DATABASE_URL})
+    print("Firebase initialized successfully.")
+except Exception as e:
+    print(f"Firebase Initialization Error: {e}")
+    exit(1)
 
 
 # Register Blupints
-from routes.auth import auth_bp
-from routes.user import user_bp
-from routes.service import service_bp
+from codeAndTests.routes.auth import auth_bp
+from codeAndTests.routes.user import user_bp
+from codeAndTests.routes.service import service_bp
 
 
 
@@ -110,7 +117,7 @@ def home():
     admin_email = app.config.get('ADMIN_EMAIL', 'admin@example.com')
     return render_template('home.html', admin_email=admin_email)
 
-from seed_services import services
+from codeAndTests.seed_services import services
 
 with app.app_context():
     if not Service.query.first():  # Check if the Service table is empty

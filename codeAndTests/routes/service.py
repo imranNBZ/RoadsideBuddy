@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.models import db, Service, Request
+from codeAndTests.models.models import db, Service, Request
 import uuid
 
 service_bp = Blueprint("service", __name__)

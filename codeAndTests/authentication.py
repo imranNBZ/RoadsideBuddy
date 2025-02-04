@@ -1,4 +1,4 @@
-import pyrebase
+
 firebase_config = {
     "apiKey": "AIzaSyA63CM9JGZJXp8nWL9fvksHKRuGMO90JYA",
     "authDomain": "roadsidebuddy-35064.firebaseapp.com",
