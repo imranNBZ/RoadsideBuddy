@@ -26,16 +26,6 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
-firebase_config = {
-    "apiKey": "AIzaSyA63CM9JGZJXp8nWL9fvksHKRuGMO90JYA",
-    "authDomain": "roadsidebuddy-35064.firebaseapp.com",
-    "databaseURL": "https://roadsidebuddy-35064-default-rtdb.firebaseio.com",
-    "projectId": "roadsidebuddy-35064",
-    "storageBucket": "roadsidebuddy-35064.appspot.com",
-    "messagingSenderId": "755289906473",
-    "appId": "1:755289906473:web:1b13c9177fbc3c5ce1eb38",
-    "measurementId": "G-M9G8CJ4N1V",
-}
 
 
 Config = Config()
